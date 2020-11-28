@@ -20,9 +20,11 @@ public class FlappyBird extends ApplicationAdapter {
 	float gravity = 2;
 	float gap = 400;
 	float maxTubeOffset;
-	float tubeOffset;
 	float tubeVelocity = 4;
-	float tubeX;
+	int numberOfTubes = 4;
+	float[] tubeX = new float[numberOfTubes];
+	float[] tubeOffset = new float[numberOfTubes];
+	float DistanceBetweenTubes;
 
 	Random randomGenerater;
 	//Main material e.g background and bird and calling of bird movement
@@ -45,6 +47,13 @@ public class FlappyBird extends ApplicationAdapter {
 	    maxTubeOffset = Gdx.graphics.getHeight() / 2 - gap / 2 - 100;
 	    //for random position of tubes
 	    randomGenerater = new Random();
+	    DistanceBetweenTubes = Gdx.graphics.getWidth() * 3/4;
+
+		for (int i = 0; i < numberOfTubes; i++) {
+			//random position of tubes
+			tubeOffset[i] = (randomGenerater.nextFloat() - 0.5f) * (Gdx.graphics.getHeight() - gap - 200);
+			tubeX[i] = Gdx.graphics.getWidth()/2-topTube.getWidth() / 2 + i * DistanceBetweenTubes;
+		}
 	}
 
 	@Override
@@ -55,14 +64,17 @@ public class FlappyBird extends ApplicationAdapter {
 		if(!gameState){
 			if(Gdx.input.justTouched()){
 				velocity = -30;
-				//random position of tubes
-				tubeOffset = (randomGenerater.nextFloat() - 0.5f) * (Gdx.graphics.getHeight() - gap - 200);
-				tubeX = Gdx.graphics.getWidth()/2-topTube.getWidth() / 2;
 			}
-			//movement of tubes
-			tubeX = tubeX - 4;
-			batch.draw(topTube,tubeX,Gdx.graphics.getHeight() / 2 + gap / 2 + tubeOffset);
-			batch.draw(bottomTube,tubeX,Gdx.graphics.getHeight()/2 - gap / 2 - bottomTube.getHeight() + tubeOffset);
+			for (int i = 0; i < numberOfTubes; i++) {
+				//movement of tubes
+				if(tubeX[i] < -topTube.getWidth()){
+					tubeX[i] += numberOfTubes * DistanceBetweenTubes;
+				}else{
+					tubeX[i] = tubeX[i] - tubeVelocity;
+				}
+				batch.draw(topTube, tubeX[i], Gdx.graphics.getHeight() / 2 + gap / 2 + tubeOffset[i]);
+				batch.draw(bottomTube, tubeX[i], Gdx.graphics.getHeight() / 2 - gap / 2 - bottomTube.getHeight() + tubeOffset[i]);
+			}
 			//it will not let the bird go out of screen
 			if(birdY > 0 || velocity < 0 ){
 				velocity = velocity + gravity;

@@ -2,9 +2,12 @@ package com.darklord_games;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Circle;
 
 import java.util.Random;
 
@@ -13,6 +16,8 @@ public class FlappyBird extends ApplicationAdapter {
 	Texture background;
 	Texture[] birds;
 	Texture topTube,bottomTube;
+	ShapeRenderer shapeRenderer;
+	Circle birdCircle;
 	int flapState = 0;
 	float birdY = 0;
 	float velocity = 0;
@@ -38,6 +43,8 @@ public class FlappyBird extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		background = new Texture("bg.png");
+		shapeRenderer = new ShapeRenderer();
+		birdCircle = new Circle();
 		birds = new Texture[2];
 	    birds[0] = new Texture("bird.png");
 		birds[1] = new Texture("bird2.png");
@@ -87,6 +94,13 @@ public class FlappyBird extends ApplicationAdapter {
 			}
 		}
 		MainMaterial();
+		//shapes for checking collison
+		birdCircle.set(Gdx.graphics.getWidth() / 2,birdY + birds[flapState].getHeight() / 2,birds[flapState].getWidth() / 2);
+
+		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+		shapeRenderer.setColor(Color.RED);
+		shapeRenderer.circle(birdCircle.x,birdCircle.y,birdCircle.radius);
+		shapeRenderer.end();
 	}
 
 	//movement of flapes

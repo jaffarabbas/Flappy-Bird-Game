@@ -69,6 +69,7 @@ public class FlappyBird extends ApplicationAdapter {
 				//movement of tubes
 				if(tubeX[i] < -topTube.getWidth()){
 					tubeX[i] += numberOfTubes * DistanceBetweenTubes;
+					tubeOffset[i] = (randomGenerater.nextFloat() - 0.5f) * (Gdx.graphics.getHeight() - gap - 200);
 				}else{
 					tubeX[i] = tubeX[i] - tubeVelocity;
 				}

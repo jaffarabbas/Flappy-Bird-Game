@@ -21,6 +21,8 @@ public class FlappyBird extends ApplicationAdapter {
 	float gap = 400;
 	float maxTubeOffset;
 	float tubeOffset;
+	float tubeVelocity = 4;
+	float tubeX;
 
 	Random randomGenerater;
 	//Main material e.g background and bird and calling of bird movement
@@ -55,9 +57,12 @@ public class FlappyBird extends ApplicationAdapter {
 				velocity = -30;
 				//random position of tubes
 				tubeOffset = (randomGenerater.nextFloat() - 0.5f) * (Gdx.graphics.getHeight() - gap - 200);
+				tubeX = Gdx.graphics.getWidth()/2-topTube.getWidth() / 2;
 			}
-			batch.draw(topTube,Gdx.graphics.getWidth()/2-topTube.getWidth() / 2,Gdx.graphics.getHeight() / 2 + gap / 2 + tubeOffset);
-			batch.draw(bottomTube,Gdx.graphics.getWidth()/2-topTube.getWidth() / 2,Gdx.graphics.getHeight()/2 - gap / 2 - bottomTube.getHeight() + tubeOffset);
+			//movement of tubes
+			tubeX = tubeX - 4;
+			batch.draw(topTube,tubeX,Gdx.graphics.getHeight() / 2 + gap / 2 + tubeOffset);
+			batch.draw(bottomTube,tubeX,Gdx.graphics.getHeight()/2 - gap / 2 - bottomTube.getHeight() + tubeOffset);
 			//it will not let the bird go out of screen
 			if(birdY > 0 || velocity < 0 ){
 				velocity = velocity + gravity;

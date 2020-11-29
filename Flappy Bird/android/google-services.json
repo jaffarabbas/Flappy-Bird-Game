@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "277950106945",
+    "firebase_url": "https://flappybird1399.firebaseio.com",
+    "project_id": "flappybird1399",
+    "storage_bucket": "flappybird1399.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277950106945:android:ba458a9a5a21b50cd025c0",
+        "android_client_info": {
+          "package_name": "com.darklord_games"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "277950106945-7vlbscaa7k0qbdtkb8bnvgtsojick31o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCNiVzosIa32GLB3RcZY_JyPAN_cHYqY4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "277950106945-7vlbscaa7k0qbdtkb8bnvgtsojick31o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
